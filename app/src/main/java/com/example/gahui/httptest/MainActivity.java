@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,16 +33,14 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*intent.setClass(getApplicationContext(),IndexActivity.class);
+                startActivity(intent);*/
                 final String name = logname.getText().toString().trim();
                 final String psw = password.getText().toString().trim();
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                        String path = "http://192.168.0.145:8080/userLogin/register/skip?userName="+name+"&password="+psw;
-                         //https://wxapp.ghyhjsw.com/userLogin/login
-                        //String path="http://192.168.0.101:8080/AndroidTest/mustLogin?logname="+name+"&password="+psw;
-                        System.out.println("坦"+path);
-
                         try {
                             try{
                                 URL url = new URL(path); //新建url并实例化
@@ -50,12 +51,12 @@ public class MainActivity extends AppCompatActivity {
                                 InputStream in = connection.getInputStream();
                                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                                 String result = reader.readLine();//读取服务器进行逻辑处理后页面显示的数据
+                                JSONObject json = new JSONObject(result);
+                                //取数据
+                                JSONObject json1= (JSONObject) json.get("data");
 
-
-
-                                    System.out.println("坦"+result);
-                                    intent.setClass(getApplicationContext(),IndexActivity.class);
-                                    startActivity(intent);
+                                intent.setClass(getApplicationContext(),IndexActivity.class);
+                                startActivity(intent);
 
                                 Log.d("MainActivity","run: "+result);
                                 if (result.equals("login successfully!")){
@@ -66,7 +67,9 @@ public class MainActivity extends AppCompatActivity {
                                     Log.d("MainActivity","run4: "+result);
                                     Looper.loop();
                                 }
-                            }catch (MalformedURLException e){}
+                            }catch (MalformedURLException e){} catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

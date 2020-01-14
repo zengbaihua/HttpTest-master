@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true" />
+    <TextView
+        android:id="@+id/TextView_city"
+        android:layout_width="fill_parent"
+        android:layout_height="56dp"
+        android:text="所在城市：" />
+    <!-- 定义一个城市信息下拉菜单-->
+    <Spinner
+        android:id = "@+id/Spinner_city"
+        android:layout_width = "fill_parent"
+        android:layout_height="56dp">
+    </Spinner >
+
+    <DatePicker
+        android:id="@+id/dp_test"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
+
+    </DatePicker>
+
+</RelativeLayout>
